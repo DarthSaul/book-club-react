@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/DarthSaul/book-club-react/issues"
   },
-  "homepage": "https://github.com/DarthSaul/book-club-react#readme"
+  "homepage": "https://github.com/DarthSaul/book-club-react#readme",
+  "dependencies": {
+    "axios": "^0.22.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.9"
+  }
 }
