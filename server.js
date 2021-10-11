@@ -9,11 +9,13 @@ connectDB();
 
 import path from 'path';
 
-import profile from './api/routes/profile.js';
+import profiles from './api/routes/profiles.js';
+import books from './api/routes/books.js';
 
 app.use(express.json());
 
-app.use('/api/profile', profile);
+app.use('/api/profile', profiles);
+app.use('/api/books', books);
 
 const PORT = process.env.PORT || 5000;
 
