@@ -5,6 +5,15 @@ import jwt from 'jsonwebtoken';
 import User from '../../models/User.js';
 
 export default class UserController {
+    static async apiGetUser(req, res, next) {
+        try {
+            const user = await User.findById(req.user.id).select('-password');
+            res.json(user);
+        } catch (err) {
+            console.error(err);
+            res.status(401).json({ error: err.message });
+        }
+    }
     static async apiRegisterUser(req, res, next) {
         const { email, password } = req.body;
         try {
@@ -35,7 +44,7 @@ export default class UserController {
             });
         } catch (err) {
             console.error(err);
-            return res.status(401).json({ error: err.message });
+            res.status(401).json({ error: err.message });
         }
     }
     static async apiLoginUser(req, res, next) {
