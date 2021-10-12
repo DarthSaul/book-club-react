@@ -7,7 +7,7 @@ export default class ProfileController {
             res.json(profile);
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: err });
+            res.status(500).json({ error: err.message });
         }
     }
     static async apiCreateProfile(req, res, next) {
@@ -17,7 +17,7 @@ export default class ProfileController {
             res.json(profile);
         } catch (err) {
             console.error(err);
-            res.status(500).json({ error: err });
+            res.status(500).json({ error: err.message });
         }
     }
 }
