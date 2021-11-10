@@ -1,6 +1,6 @@
 import Book from '../../models/Book.js';
 
-export default class ProfileController {
+export default class BookCtrl {
     static async apiGetBooks(req, res, next) {
         const { title, author, genre } = req.query;
         let query = {};

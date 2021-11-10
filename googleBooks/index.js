@@ -5,28 +5,45 @@ import axios from 'axios';
 
 const apiKey = process.env.BOOKS_API_KEY;
 
-async function getBooks() {
+export async function getBooks() {
     try {
+        const data = {
+            count: 0,
+            books: []
+        };
         const response = await axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=${apiKey}`
+            `https://www.googleapis.com/books/v1/volumes?q=harry%20potter+inauthor:rowling&key=${apiKey}`
         );
-        return response.data;
-    } catch (error) {
-        console.error(error);
+        response.data.items.map(el => {
+            // console.log(el.volumeInfo);
+            const { title, authors, publishedDate, categories, imageLinks } =
+                el.volumeInfo;
+            data.count += 1;
+            data.books.push({
+                title,
+                authors,
+                publishedDate,
+                categories,
+                imageLinks
+            });
+        });
+        return data;
+    } catch (err) {
+        console.error(err);
     }
 }
 
-const books = getBooks().then(res => {
-    const data = {
-        count: 0,
-        books: []
-    };
-    res.items.map(el => {
-        el.volumeInfo;
-        data.count += 1;
-        data.books.push({
-            title: `${el.volumeInfo.title}`
-        });
-    });
-    console.log(data);
-});
+// getBooks()
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err));
+
+// async function showBooks() {
+//     try {
+//         const books = await getBooks();
+//         console.log(books);
+//     } catch (err) {
+//         console.error(error);
+//     }
+// }
+
+// showBooks();
