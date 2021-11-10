@@ -1,19 +1,24 @@
 import dotenv from 'dotenv';
-dotenv.config();
-
 import axios from 'axios';
-
+dotenv.config();
 const apiKey = process.env.BOOKS_API_KEY;
 
-export async function getBooks() {
+export async function googleBooks(queries) {
     try {
+        let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+        if ('title' in queries) {
+            url += `${queries['title']}+`;
+        }
+        if ('author' in queries) {
+            url += `inauthor:${queries['author']}`;
+        }
+        url += `&maxResults=25&key=${apiKey}`;
+        const response = await axios.get(url); // `https://www.googleapis.com/books/v1/volumes?q=inauthor:rowling*&key=${apiKey}`
+        // console.log(response.data);
         const data = {
             count: 0,
             books: []
         };
-        const response = await axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=harry%20potter+inauthor:rowling&key=${apiKey}`
-        );
         response.data.items.map(el => {
             // console.log(el.volumeInfo);
             const { title, authors, publishedDate, categories, imageLinks } =

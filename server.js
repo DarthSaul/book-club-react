@@ -19,7 +19,7 @@ import User from './models/User.js';
 import users from './api/routes/users.js';
 import profiles from './api/routes/profiles.js';
 import books from './api/routes/books.js';
-import googleBooks from './api/routes/googleBooks.js';
+import bookAPIs from './api/routes/bookAPIs.js';
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -41,7 +41,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/api/user', users);
 app.use('/api/profile', profiles);
 app.use('/api/books', books);
-app.use('/api/google_books', googleBooks);
+app.use('/api/book_APIs', bookAPIs);
 
 const PORT = process.env.PORT || 5000;
 
